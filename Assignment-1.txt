@@ -1,0 +1,65 @@
+Assignment-1
+
+---creating account table---
+create table account(account_no varchar(15) primary key ,customer_name varchar(15) not null,
+balance numeric(20.2) not null);
+
+
+---Transaction tracking table creation---
+
+create table Transactions_deatails1(id int primary key auto_increment,
+account_no numeric(15) not null,
+changes_at timestamp,
+before_balance numeric(10,2) not null,
+after_balance numeric(10,2) not null,type_of_transaction varchar(10) not null);
+
+--Trigger for withdrawal transaction---
+
+delimiter $$
+create trigger Transaction_debit before update on account for each row
+begin
+IF (new.balance<old.balance) THEN
+insert into transactions_deatails(account_no, changes_at,before_balance,  after_balance,type_of_transaction)
+values(old.account_no, now(), old.balance,new.balance,'Withdrawal');
+end if;
+end$$
+
+--Trigger for credit transaction---
+
+delimiter $$
+create trigger Transaction_credit before update on account for each row
+begin
+IF (new.balance>old.balance) THEN
+insert into transactions_deatails(account_no, changes_at,before_balance,  after_balance,type_of_transaction)
+values(old.account_no, now(), old.balance,new.balance,'Deposit');
+end if;
+end$$
+
+---drop triggers---
+
+drop trigger Transaction_credit;
+drop trigger Transaction_debit;
+
+---Procedure for deposit for required time range---
+
+delimiter $$
+create procedure st_deposite_u(in time1 timestamp,in time2 timestamp)
+begin
+select sum(after_balance-before_balance) from transactions_deatails
+where type_of_transaction='Deposit' and 
+(changes_at BETWEEN time1 AND time2);
+end$$
+
+call st_deposite_u('2022-11-08 15:58:00', '2022-11-08 16:00:00')
+
+---Procedure for withdrawal for required time range---
+
+delimiter $$
+create procedure st_withdrawal_u(in time1 timestamp,in time2 timestamp)
+begin
+select sum(before_balance-after_balance) from transactions_deatails
+where type_of_transaction='Withdrawal' and 
+(changes_at BETWEEN time1 AND time2);
+end$$
+
+call st_withdrawal_u('2022-11-08 15:58:00', '2022-11-08 16:00:00');
