@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+                <h4 align="center"><b>Assignment-2<b><h4>
+                <br><br>
+
+                <form align="center" action="Form.html">
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="Enter the name">
+                <br><br>
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Enter the E-mail">
+                <br><br>
+                <label for="password"><b>Password<b></label>
+                <input type="password" placeholder="Enter the password" minlength="5">
+                <br><br>
+                <label for="age"><b>Age</b></label>
+                <input type="number" placeholder="Enter the age">
+                <br><br>
+                <label for="Mobile number"><b>Mobile number</b></label>
+                <input type="tel" placeholder="Enter the ph-no">
+                <br><br>
+                <label for="date of birth"><b>DOB</b></label>
+                <input type="date" placeholder="Enter the DOB">
+                <br><br>
+                <label for="gender"><b>Male</b></label>
+                <input type="radio" name="gender">
+                <label for="gender"><b>Female</b></label>
+                <input type="radio" name="gender">
+                <br><br>
+                <label for="terms & condition"><b> I agree the terms & conditions</b>
+                   </label>
+                <input type="checkbox">
+                <br><br>
+                <button type="submit">Submit</button>
+            </form>
+</body>
+</html>
